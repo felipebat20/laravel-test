@@ -15,12 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'teste'], function(){
-    Route::get('/teste2',function (){
-        return view ('teste');
-    });
-    
+Route::group(['prefix' => 'pessoas'], function(){
+    Route::get('/','PessoasController@index');
 });
+
+// Route::group(['prefix' => 'teste'], function(){
+//     Route::get('/teste2',function (){
+//         return view ('teste');
+//     });
+    
+// });
 
 // Route::get('/teste', function(){
 //     return view('teste');
