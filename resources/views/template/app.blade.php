@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Principal</title>
+    <style>
+        .cards{
+            display: flex;
+            flex-direction: row;
+
+        }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
@@ -28,9 +35,13 @@
             </li>
             
           </ul>
-        @yield('content')
+        
         </div>
       </nav>
+      <div class="container">
+        @yield('content')
+      </div>
+      
 
 
 
