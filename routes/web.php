@@ -10,14 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix'=>'pessoas'], function() {
+   Route::get('/', "PessoasController@index");
 });
+// Route::get('/', function() {
+//     return view('template.app');
+// });
 
-Route::group(['prefix' => 'pessoas'], function(){
-    Route::get('/','PessoasController@index');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::group(['prefix' => 'pessoas'], function(){
+//     Route::get('/','PessoasController@index');
+// });
 
 // Route::group(['prefix' => 'teste'], function(){
 //     Route::get('/teste2',function (){
