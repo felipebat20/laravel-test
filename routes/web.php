@@ -18,7 +18,7 @@ Route::group(['prefix'=>'pessoas'], function() {
 
 Route::permanentRedirect('/felipe', 'pessoas');
 
-Route::view('/services', 'template.app');
+Route::view('/services', 'template.app', ['name'=>'felipe']);
 // Route::get('/', function() {
 //     return view('template.app');
 // });
