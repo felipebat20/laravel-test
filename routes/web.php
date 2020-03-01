@@ -16,6 +16,7 @@ Route::group(['prefix'=>'pessoas'], function() {
    Route::post('/store', "PessoasController@store");
 });
 
+Route::redirect('/felipe', 'pessoas');
 // Route::get('/', function() {
 //     return view('template.app');
 // });
