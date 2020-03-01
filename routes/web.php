@@ -19,6 +19,10 @@ Route::group(['prefix'=>'pessoas'], function() {
 Route::permanentRedirect('/felipe', 'pessoas');
 
 Route::view('/services', 'template.app', ['name'=>'felipe']);
+
+Route::get('/user/{id}', function($id){
+   return 'User'.$id;
+});
 // Route::get('/', function() {
 //     return view('template.app');
 // });
