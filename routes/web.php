@@ -31,6 +31,10 @@ Route::get('aluno/{name?}', function($name = 'Felipe'){
 Route::get('teacher/{name}', function($name){
 
 }) ->Where('name', '[A-Za-z]+');
+
+Route::get('academic/profile', function() {
+   return 2+2;
+})->name('profile');
 // Route::get('/', function() {
 //     return view('template.app');
 // });
