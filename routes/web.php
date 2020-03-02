@@ -23,6 +23,9 @@ Route::view('/services', 'template.app', ['name'=>'felipe']);
 Route::get('/user/{id}', function($id){
    return 'User'.$id;
 });
+Route::get('aluno/{name?}', function($name = 'Felipe'){
+   return $name;
+});
 // Route::get('/', function() {
 //     return view('template.app');
 // });
