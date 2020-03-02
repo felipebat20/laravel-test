@@ -23,9 +23,14 @@ Route::view('/services', 'template.app', ['name'=>'felipe']);
 Route::get('/user/{id}', function($id){
    return 'User'.$id;
 });
+
 Route::get('aluno/{name?}', function($name = 'Felipe'){
    return $name;
 });
+
+Route::get('teacher/{name}', function($name){
+
+}) ->Where('name', '[A-Za-z]+');
 // Route::get('/', function() {
 //     return view('template.app');
 // });
