@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pessoa;
+use App\Telefone;
 use Illuminate\Http\Request;
 
 class PessoasController extends Controller
@@ -28,8 +29,16 @@ class PessoasController extends Controller
     
     public function store(Request $request)
     {
-        Pessoa::create($request->all());
-        $this->telefone_controller->store();
+        $pessoa = Pessoa::create($request->all());
+        if($request->ddd && $request->number)
+        {
+            $telefone = new Telefone();
+            $telefone->ddd = $request->ddd;
+            $telefone->telefone = $request->number;
+            $telefone->pessoa_id = $pessoa->id;
+            $this->telefone_controller->store($telefone);
+        }
+        
         return redirect("/pessoas")->with("message", "Pessoa criada com sucesso!");
     }
 }

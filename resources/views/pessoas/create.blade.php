@@ -21,9 +21,10 @@
                     <input type="text" name="number" class="form-control" placeholder="Telefone">
                 </div>
             </div>
-            
-           <button type="submit" style="float: right;" class="btn btn-primary justify-content-right">Salvar</button>
-        </form>
+            <div class="col-md-12">
+                <button type="submit" style="float: right;" class="btn btn-primary justify-content-right">Salvar</button>
+            </div>
+           </form>
     </div>
 @endsection
 
