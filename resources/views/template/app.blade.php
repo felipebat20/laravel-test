@@ -39,7 +39,7 @@
         </div>
       </nav>
       <div class="container">
-        {{ $name }}
+        
         @yield('content')
       </div>
       

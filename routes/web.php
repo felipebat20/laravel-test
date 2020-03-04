@@ -16,6 +16,7 @@ Route::group(['prefix'=>'pessoas'], function() {
    Route::post('/store', "PessoasController@store");
 });
 
+// Routes Test
 Route::permanentRedirect('/felipe', 'pessoas');
 
 Route::view('/services', 'template.app', ['name'=>'felipe']);
@@ -35,6 +36,10 @@ Route::get('teacher/{name}', function($name){
 Route::get('academic/profile', function() {
    return 2+2;
 })->name('profile');
+
+
+
+
 // Route::get('/', function() {
 //     return view('template.app');
 // });
