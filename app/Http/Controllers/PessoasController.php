@@ -41,4 +41,8 @@ class PessoasController extends Controller
         
         return redirect("/pessoas")->with("message", "Pessoa criada com sucesso!");
     }
+    public function editarView($id)
+    {
+        var_dump($id);
+    }
 }
