@@ -64,12 +64,19 @@ class PessoasController extends Controller
         ]);
     }
 
+    protected function destroy($id)
+    {
+        $pessoa = Pessoa::find($id);
+        $pessoa->delete();
+        return redirect('pessoas')->with('success', 'Excluído');
+    }
+
     protected function getPessoa($id)
     {
         
-        $pessoa = Pessoa::find($id);
+        $this->pessoa = Pessoa::find($id);
         
-        return $pessoa;
+        return $this->pessoa;
     }
 
 }
