@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PessoasController extends Controller
 {
     private $telefone_controller;
-
+    private $pessoa;
+    
     public function __construct(TelefonesController $telefones_controller)
     {
         $this->telefone_controller = $telefones_controller;
@@ -23,7 +24,8 @@ class PessoasController extends Controller
         ]);
     }
 
-    public function novoView(){
+    public function novoView()
+    {
         return view('pessoas.create');
     }
     
@@ -43,6 +45,31 @@ class PessoasController extends Controller
     }
     public function editarView($id)
     {
-        var_dump($id);
+        return view('pessoas.edit', [
+            'pessoa' => $this->getPessoa($id)
+        ]);
     }
+
+    public function update(Request $request)
+    {
+        $pessoa = $this->getPessoa($request->id);
+        $pessoa->update($request->all());
+        return redirect('/pessoas');
+    } 
+
+    protected function excluirView($id)
+    {
+        return view('pessoas.delete', [
+            'pessoa' => $this->getPessoa($id)
+        ]);
+    }
+
+    protected function getPessoa($id)
+    {
+        
+        $pessoa = Pessoa::find($id);
+        
+        return $pessoa;
+    }
+
 }
