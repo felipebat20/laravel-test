@@ -6,7 +6,7 @@
 </div>
 
 @if(count($errors)){
-    {{$errors}}
+    {{$errors->first()}}
 }
 @endif
 

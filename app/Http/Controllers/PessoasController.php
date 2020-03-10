@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Pessoa;
 use App\Telefone;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PessoasController extends Controller
 {
@@ -82,7 +84,7 @@ class PessoasController extends Controller
         
         return $this->pessoa;
     }
-    private function validation($data)
+    private function validacao($data)
     {
         $regras = [
             'nome' => 'required'
@@ -90,7 +92,8 @@ class PessoasController extends Controller
         $mensagens = [
             'nome.required' => 'Campo nome é obrigatório.'
         ];
-        return Validator::make($data, $regras, $mensagens);
+        $validator = Validator::make($data, $regras, $mensagens);
+        return $validator;
     }
 
 }
