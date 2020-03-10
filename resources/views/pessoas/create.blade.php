@@ -4,6 +4,12 @@
 <div class="col-12">
     <h3>Novo contato</h3>
 </div>
+
+@if(count($errors)){
+    {{$errors}}
+}
+@endif
+
 <div class="col-6 ">
     <form action="{{url('/pessoas/store')}}" method="POST">
         {{ csrf_field()}}

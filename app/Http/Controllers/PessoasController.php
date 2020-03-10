@@ -31,6 +31,10 @@ class PessoasController extends Controller
     
     public function store(Request $request)
     {
+        $validacao = $this->validacao($request->all());
+        if($validacao->fails()){
+            return redirect()->back()->withErrors($validacao->errors())->withInput($request->all());
+        }
         $pessoa = Pessoa::create($request->all());
         if($request->ddd && $request->number)
         {
@@ -77,6 +81,16 @@ class PessoasController extends Controller
         $this->pessoa = Pessoa::find($id);
         
         return $this->pessoa;
+    }
+    private function validation($data)
+    {
+        $regras = [
+            'nome' => 'required'
+        ];
+        $mensagens = [
+            'nome.required' => 'Campo nome é obrigatório.'
+        ];
+        return Validator::make($data, $regras, $mensagens);
     }
 
 }
