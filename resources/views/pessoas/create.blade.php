@@ -5,17 +5,20 @@
     <h3>Novo contato</h3>
 </div>
 
-@if(count($errors)){
-    {{$errors->first()}}
-}
-@endif
+
 
 <div class="col-6 ">
-    <form action="{{url('/pessoas/store')}}" method="POST">
+    <form action="{{url('/pessoas/store')}}" method="POST" novalidate>
         {{ csrf_field()}}
-        <div class="form-group col-md-12 pr-0 mt-4">
+        <div class="form-group col-md-12 pr-0 mt-4 {{$errors->has('nome')? 'text-danger': ''}}">
             <label class="control-label">Nome: </label>
-            <input type="text" name="nome" class="form-control" placeholder="Nome">
+            <input type="text" name="nome" class="form-control {{$errors->has('nome')? 'border-danger': ''}}"
+                placeholder="Nome">
+            @if($errors->has('nome'))
+                <span class="{{$errors->has('nome')? 'text-danger': ''}}">
+                    {{$errors->first('nome')}}
+                </span>
+            @endif
         </div>
         <div class="row col-md-12 mx-auto pr-0">
             <div class="form-group col-md-2 p-0 m-0 ">
