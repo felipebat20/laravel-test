@@ -87,10 +87,11 @@ class PessoasController extends Controller
     private function validacao($data)
     {
         $regras = [
-            'nome' => 'required'
+            'nome' => 'required|min:3'
         ];
         $mensagens = [
-            'nome.required' => 'Campo nome é obrigatório.'
+            'nome.required' => 'Campo nome é obrigatório.',
+            'nome.min' => 'O nome deve ter pelo menos 3 caracteres.'
         ];
         $validator = Validator::make($data, $regras, $mensagens);
         return $validator;
