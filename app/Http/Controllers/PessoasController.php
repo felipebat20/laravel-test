@@ -58,6 +58,10 @@ class PessoasController extends Controller
 
     public function update(Request $request)
     {
+        $validacao = $this->validacao($request->all());
+        if($validacao->fails()){
+            return redirect()->back()->withErrors($validacao->errors())->withInput($request->all());
+        }
         $pessoa = $this->getPessoa($request->id);
         $pessoa->update($request->all());
         return redirect('/pessoas');
@@ -86,12 +90,26 @@ class PessoasController extends Controller
     }
     private function validacao($data)
     {
-        $regras = [
-            'nome' => 'required|min:3'
-        ];
+        
+        //Validação de ddd e telefone
+        if (array_key_exists('ddd', $data) && array_key_exists('number', $data)){
+            if($data['ddd'] || $data['number']){
+                $regras['ddd'] = 'required|size:2';
+                $regras['number'] = 'required';
+            }
+            
+        }
+
+        //Validando o Nome 
+        $regras['nome'] = 'required|min:3';
+
+        //Atribuindo as mensagens para a validação 
         $mensagens = [
             'nome.required' => 'Campo nome é obrigatório.',
-            'nome.min' => 'O nome deve ter pelo menos 3 caracteres.'
+            'nome.min' => 'O nome deve ter pelo menos 3 caracteres.',
+            'ddd.required' => 'O campo ddd é obrigátório.',
+            'ddd.size' => 'Campo ddd deve ter pelo menos 2 digitos.',
+            'number.required' => 'O campo telefone é obrigatório.',
         ];
         $validator = Validator::make($data, $regras, $mensagens);
         return $validator;

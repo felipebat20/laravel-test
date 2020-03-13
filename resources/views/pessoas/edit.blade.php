@@ -9,9 +9,14 @@
     <form action="{{url('/pessoas/update')}}" method="POST">
       {{ csrf_field()}}
       <input type="hidden" name="id" value="{{ $pessoa->id}}">
-      <div class="form-group col-md-12 pr-0 mt-4">
+      <div class="form-group col-md-12 pr-0 mt-4 {{$errors->has('nome')? 'text-danger': ''}}">
         <label class="control-label">Nome: </label>
         <input type="text" name="nome" value="{{$pessoa->nome}}" class="form-control" placeholder="Nome">
+          @if($errors->has('nome'))
+              <span class="{{$errors->has('nome')? 'text-danger': ''}}">
+                {{$errors->first('nome')}}
+              </span>
+          @endif
       </div>
       <div class="col-md-12">
         <button style="margin-top: 5px; float:right; " class="btn btn-primary">Salvar</button>
