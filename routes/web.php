@@ -11,7 +11,6 @@
 |
 */
 Route::group(['prefix'=>'pessoas'], function() {
-   Route::get('/', "PessoasController@index");
    Route::get('/novo', "PessoasController@novoView");
    Route::get('/{id}/editar', "PessoasController@editarView");
    Route::get('/{id}/destroy', "PessoasController@destroy");
@@ -19,6 +18,8 @@ Route::group(['prefix'=>'pessoas'], function() {
    Route::post('/store', "PessoasController@store");
    Route::post('/update', "PessoasController@update");
    Route::get('/{id}/excluir', "PessoasController@excluirView");
+   Route::get('/{letra}', "PessoasController@index");
+   Route::redirect('/', '/pessoas/A');
 });
 
 // Routes Test

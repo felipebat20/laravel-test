@@ -2,6 +2,22 @@
 
 @section('content')
 <div class="row col-12 justify-content-center">
+
+  <div class="row col-12 justify-content-center mt-3">
+    @foreach (range('A', 'Z') as $letra)
+    <div class="btn-group">
+      <a href="{{url('/pessoas/'.$letra.'/')}}" class="btn btn-info m-1 {{$letra === $criterio ? 'disabled' : '' }}">
+        {{$letra}}  
+      </a>
+    </div>
+  @endforeach
+
+  <div class="col-sm-12 m-3 pl-3">
+    <h1 class="ml-3">Letra: {{$criterio}}</h1>
+  </div>
+  </div>
+  
+
   @foreach ($pessoas as $pessoa)
   <div class="card col-3 mr-2 mt-3 p-0 border-primary">
     <div class=" card-header p-0 m-0">

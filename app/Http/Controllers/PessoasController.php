@@ -18,11 +18,12 @@ class PessoasController extends Controller
         $this->telefone_controller = $telefones_controller;
     }
 
-    public function index()
+    public function index($letra)
     {
-        $list_pessoas = Pessoa::all();
+        $list_pessoas = Pessoa::indexLetra($letra);
         return view('pessoas.index', [
-            'pessoas' => $list_pessoas
+            'pessoas' => $list_pessoas,
+            'criterio' => $letra,
         ]);
     }
 
