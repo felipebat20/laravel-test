@@ -7,16 +7,27 @@
     @foreach (range('A', 'Z') as $letra)
     <div class="btn-group">
       <a href="{{url('/pessoas/'.$letra.'/')}}" class="btn btn-info m-1 {{$letra === $criterio ? 'disabled' : '' }}">
-        {{$letra}}  
+        {{$letra}}
       </a>
     </div>
-  @endforeach
+    @endforeach
 
-  <div class="col-sm-12 m-3 pl-3">
-    <h1 class="ml-3">Letra: {{$criterio}}</h1>
+    <div class="col-sm-8 m-3 pl-3">
+      <h1 class="ml-3">Letra: {{$criterio}}</h1>
+    </div>
+    <div class="col-sm-3 m-3 pl-3">
+    <form action="{{url('pessoas/busca')}}" method="POST" class="form-inline">
+      {{ csrf_field()}}
+        <div class="form-group mx-sm-12 mb-2">
+          <label for="inputPassword2" class="sr-only">Password</label>
+          <input type="text" class="form-control" name="criterio" placeholder="Procure">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </form>
+    </div>
+
   </div>
-  </div>
-  
+
 
   @foreach ($pessoas as $pessoa)
   <div class="card col-3 mr-2 mt-3 p-0 border-primary">

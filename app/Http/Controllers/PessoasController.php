@@ -12,7 +12,7 @@ class PessoasController extends Controller
 {
     private $telefone_controller;
     private $pessoa;
-    
+
     public function __construct(TelefonesController $telefones_controller)
     {
         $this->telefone_controller = $telefones_controller;
@@ -27,27 +27,36 @@ class PessoasController extends Controller
         ]);
     }
 
+    public function busca(Request $request)
+    {
+        $pessoas = Pessoa::busca($request->criterio);
+        return view('
+        pessoas.index', [
+            'pessoas' => $pessoas,
+            'criterio' => $request->criterio
+        ]);
+    }
+
     public function novoView()
     {
         return view('pessoas.create');
     }
-    
+
     public function store(Request $request)
     {
         $validacao = $this->validacao($request->all());
-        if($validacao->fails()){
+        if ($validacao->fails()) {
             return redirect()->back()->withErrors($validacao->errors())->withInput($request->all());
         }
         $pessoa = Pessoa::create($request->all());
-        if($request->ddd && $request->number)
-        {
+        if ($request->ddd && $request->number) {
             $telefone = new Telefone();
             $telefone->ddd = $request->ddd;
             $telefone->telefone = $request->number;
             $telefone->pessoa_id = $pessoa->id;
             $this->telefone_controller->store($telefone);
         }
-        
+
         return redirect("/pessoas")->with("message", "Pessoa criada com sucesso!");
     }
     public function editarView($id)
@@ -60,13 +69,13 @@ class PessoasController extends Controller
     public function update(Request $request)
     {
         $validacao = $this->validacao($request->all());
-        if($validacao->fails()){
+        if ($validacao->fails()) {
             return redirect()->back()->withErrors($validacao->errors())->withInput($request->all());
         }
         $pessoa = $this->getPessoa($request->id);
         $pessoa->update($request->all());
         return redirect('/pessoas');
-    } 
+    }
 
     protected function excluirView($id)
     {
@@ -84,21 +93,20 @@ class PessoasController extends Controller
 
     protected function getPessoa($id)
     {
-        
+
         $this->pessoa = Pessoa::find($id);
-        
+
         return $this->pessoa;
     }
     private function validacao($data)
     {
-        
+
         //Validação de ddd e telefone
-        if (array_key_exists('ddd', $data) && array_key_exists('number', $data)){
-            if($data['ddd'] || $data['number']){
+        if (array_key_exists('ddd', $data) && array_key_exists('number', $data)) {
+            if ($data['ddd'] || $data['number']) {
                 $regras['ddd'] = 'required|size:2';
                 $regras['number'] = 'required';
             }
-            
         }
 
         //Validando o Nome 
@@ -115,5 +123,4 @@ class PessoasController extends Controller
         $validator = Validator::make($data, $regras, $mensagens);
         return $validator;
     }
-
 }

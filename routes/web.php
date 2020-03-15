@@ -18,6 +18,7 @@ Route::group(['prefix'=>'pessoas'], function() {
    Route::post('/store', "PessoasController@store");
    Route::post('/update', "PessoasController@update");
    Route::get('/{id}/excluir', "PessoasController@excluirView");
+   Route::post('/busca', "PessoasController@busca");
    Route::get('/{letra}', "PessoasController@index");
    Route::redirect('/', '/pessoas/A');
 });
